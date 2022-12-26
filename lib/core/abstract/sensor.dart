@@ -10,13 +10,15 @@ class Sensor<T> {
   final String name;
   final SensorsTypes type;
   bool isActive;
-  Stream<T> listener;
+  bool available;
+  Stream<T>? listener;
 
   Sensor({
     required this.icon,
     required this.name,
     required this.type,
     required this.isActive,
-    required this.listener
+    this.listener,
+    this.available = true,
   });
 }

@@ -1,10 +1,6 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
-import 'package:collection/collection.dart';
 import 'package:flutter_censors_manager/application/theme/colors.dart';
-
-List<Color> colors = [GoalGreen, GoalCarrot, GoalRed, GoalYellow];
-
 class LineChartContainer extends StatelessWidget {
   final List<LineChartBarData> data;
 
@@ -31,8 +27,8 @@ class LineChartContainer extends StatelessWidget {
         minY: 0,
         lineBarsData: data,
       ),
-      swapAnimationCurve: Curves.easeInOut,
-      swapAnimationDuration: const Duration(milliseconds: 700),
+      swapAnimationCurve: Curves.linear,
+      swapAnimationDuration: const Duration(milliseconds: 1700),
     );
   }
 }

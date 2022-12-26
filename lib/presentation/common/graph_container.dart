@@ -5,12 +5,8 @@ import 'package:flutter_censors_manager/application/theme/colors.dart';
 import 'package:flutter_censors_manager/core/abstract/sensor.dart';
 import 'package:flutter_censors_manager/presentation/common/line_chart.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:slidable_line_chart/slidable_line_chart.dart';
 
-enum CoordinateType {
-  left,
-  right,
-}
+List<Color> colors = [kGoalGreen, kGoalCarrot, kGoalRed, kGoalYellow];
 
 class GraphContainer extends ConsumerStatefulWidget {
   final Sensor sensor;
@@ -22,6 +18,8 @@ class GraphContainer extends ConsumerStatefulWidget {
 }
 
 class _GraphContainerState extends ConsumerState<GraphContainer> with AutomaticKeepAliveClientMixin {
+  List<LineChartBarData>? list;
+
   @override
   Widget build(BuildContext context) {
     super.build(context);
@@ -33,7 +31,6 @@ class _GraphContainerState extends ConsumerState<GraphContainer> with AutomaticK
     final radius = graphHeight * 0.1;
 
     final data = ref.watch(homeProvider.select((value) => value.sensorData[widget.sensor.type]));
-
     if (data == null) return const SizedBox();
 
     return Container(
@@ -49,10 +46,10 @@ class _GraphContainerState extends ConsumerState<GraphContainer> with AutomaticK
           color: darkSurfaceColor,
           width: 2,
         ),
-        gradient: LinearGradient(
+        gradient: const RadialGradient(
           colors: [darkSurfaceColor, darkBackgroundColor],
-          begin: Alignment.topLeft,
-          end: Alignment.bottomRight,
+          center: Alignment(-1, -1),
+          radius: 1.8,
         ),
       ),
       child: SizedBox(
@@ -79,71 +76,38 @@ class _GraphContainerState extends ConsumerState<GraphContainer> with AutomaticK
               ),
               Expanded(
                 child: LineChartContainer(
-                  data: [
-                    LineChartBarData(
+                  data: List.generate(
+                    data.last.values.length,
+                    (index) => LineChartBarData(
                       spots: data.map((e) {
                         final remaningTime = DateTime.now().difference(DateTime.fromMillisecondsSinceEpoch(e.timestamp)).inSeconds;
 
                         final x = 100.0 - remaningTime;
 
-                        final y = e.x + 50;
+                        final y = e.values[index] + (100 / (index + 1));
 
                         return FlSpot(x, y);
                       }).toList(),
                       isCurved: false,
                       barWidth: 1,
                       isStrokeCapRound: false,
+                      gradient: LinearGradient(
+                        colors: [
+                          colors[index % colors.length].withOpacity(0.0),
+                          colors[index % colors.length].withOpacity(1),
+                        ],
+                      ),
+                      curveSmoothness: 0,
+                      isStrokeJoinRound: true,
                       dotData: FlDotData(
                         show: false,
                       ),
-                      color: GoalGreen,
+                      color: colors[index % colors.length],
                       belowBarData: BarAreaData(
                         show: false,
                       ),
                     ),
-                    LineChartBarData(
-                      spots: data.map((e) {
-                        final remaningTime = DateTime.now().difference(DateTime.fromMillisecondsSinceEpoch(e.timestamp)).inSeconds;
-
-                        final x = 100.0 - remaningTime;
-
-                        final y = e.y + 30;
-
-                        return FlSpot(x, y);
-                      }).toList(),
-                      isCurved: false,
-                      barWidth: 1,
-                      isStrokeCapRound: false,
-                      dotData: FlDotData(
-                        show: false,
-                      ),
-                      color: GoalCarrot,
-                      belowBarData: BarAreaData(
-                        show: false,
-                      ),
-                    ),
-                    LineChartBarData(
-                      spots: data.map((e) {
-                        final remaningTime = DateTime.now().difference(DateTime.fromMillisecondsSinceEpoch(e.timestamp)).inSeconds;
-
-                        final x = 100.0 - remaningTime;
-
-                        final y = e.z + 10;
-
-                        return FlSpot(x, y);
-                      }).toList(),
-                      isCurved: false,
-                      barWidth: 1,
-                      isStrokeCapRound: false,
-                      dotData: FlDotData(
-                        show: false,
-                      ),
-                      color: GoalYellow,
-                      belowBarData: BarAreaData(
-                        show: false,
-                      ),
-                    ),
-                  ],
+                  ),
                 ),
               ),
             ],

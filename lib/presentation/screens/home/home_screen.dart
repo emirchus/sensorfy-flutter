@@ -75,6 +75,7 @@ class HomeScreen extends ConsumerWidget {
                   (context, index) {
                     final sensor = sensors[index];
                     return SensorCard(
+                      isAvailable: sensor.available,
                       icon: sensor.icon,
                       sensorName: sensor.name,
                       isActive: sensor.isActive,

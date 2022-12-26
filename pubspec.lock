@@ -57,6 +57,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.0.5"
+  environment_sensors:
+    dependency: "direct main"
+    description:
+      name: environment_sensors
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.2.0"
   equatable:
     dependency: transitive
     description:
@@ -254,6 +261,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "4.2.4"
+  proximity_sensor:
+    dependency: "direct main"
+    description:
+      name: proximity_sensor
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.0.4"
   riverpod:
     dependency: transitive
     description:

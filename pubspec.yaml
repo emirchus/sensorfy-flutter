@@ -18,6 +18,8 @@ dependencies:
   slidable_line_chart: ^1.0.2
   fl_chart: ^0.55.2
   collection: ^1.16.0
+  proximity_sensor: ^1.0.4
+  environment_sensors: ^0.2.0
 
 
 dev_dependencies:

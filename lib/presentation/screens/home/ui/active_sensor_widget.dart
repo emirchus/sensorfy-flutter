@@ -34,16 +34,16 @@ class ActiveSensorWidget extends ConsumerWidget {
       ),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(18),
-        gradient: LinearGradient(
+        gradient: const LinearGradient(
           colors: [
-            SensifyGreen,
-            SensifyGreen40,
+            kSensifyGreen,
+            kSensifyGreen40,
           ],
           begin: Alignment.topCenter,
           end: Alignment.bottomCenter,
         ),
         border: Border.all(
-          color: SensifyGreen40,
+          color: kSensifyGreen40,
           width: 1,
         ),
       ),
@@ -57,7 +57,7 @@ class ActiveSensorWidget extends ConsumerWidget {
             child: Container(
               padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 16),
               decoration: BoxDecoration(
-                color: SensifyGreen30,
+                color: kSensifyGreen30,
                 borderRadius: BorderRadius.circular(18),
               ),
               child: Text(
