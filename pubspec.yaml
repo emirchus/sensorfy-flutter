@@ -1,0 +1,29 @@
+name: flutter_censors_manager
+description: A new Flutter project.
+
+publish_to: 'none'
+version: 1.0.0+1
+
+environment:
+  sdk: '>=2.18.6 <3.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  cupertino_icons: ^1.0.2
+  flutter_riverpod: ^2.1.2
+  sensors_plus: ^2.0.1
+  google_fonts: ^3.0.1
+  chart_sparkline: ^1.0.12
+  slidable_line_chart: ^1.0.2
+  fl_chart: ^0.55.2
+  collection: ^1.16.0
+
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^2.0.0
+
+flutter:
+  uses-material-design: true
